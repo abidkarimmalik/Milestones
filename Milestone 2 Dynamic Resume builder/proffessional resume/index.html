@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Builder</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9fb;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #444;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .resume-preview {
+            background-color: #f7f7f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .resume-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            border: 2px solid #ddd;
+        }
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .resume-content h3 {
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Professional Resume Builder</h1>
+        <form id="resume-form">
+            <h2>Personal Information</h2>
+            <label for="profile-picture">Profile Picture</label>
+            <input type="file" id="profile-picture" accept="image/*">
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" placeholder="Enter your full name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" placeholder="Enter your phone number" required>
+
+            <h2>Education</h2>
+            <label for="education">Education Details</label>
+            <textarea id="education" placeholder="e.g., Bachelor's in Computer Science, XYZ University"></textarea>
+
+            <h2>Work Experience</h2>
+            <label for="experience">Experience Details</label>
+            <textarea id="experience" placeholder="e.g., Software Developer at ABC Corp (2020-2023)"></textarea>
+
+            <h2>Skills</h2>
+            <label for="skills">Skills</label>
+            <input type="text" id="skills" placeholder="e.g., JavaScript, Python, Team Leadership">
+
+            <h2>Additional Information</h2>
+            <label for="additional-info">Additional Information</label>
+            <textarea id="additional-info" placeholder="e.g., Volunteer work, Certifications"></textarea>
+
+            <button type="button" onclick="generateResume()">Generate Resume</button>
+        </form>
+
+        <div class="resume-preview" id="resume-preview">
+            <h2>Resume Preview</h2>
+            <p>Fill out the form and click "Generate Resume" to see your resume preview here.</p>
+        </div>
+    </div>
+
+    <script>
+        function generateResume() {
+            const fileInput = document.getElementById('profile-picture');
+            const picturePreview = fileInput.files[0] 
+                ? URL.createObjectURL(fileInput.files[0]) 
+                : null;
+
+            const name = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const education = document.getElementById('education').value;
+            const experience = document.getElementById('experience').value;
+            const skills = document.getElementById('skills').value;
+            const additionalInfo = document.getElementById('additional-info').value;
+
+            const preview = document.getElementById('resume-preview');
+            preview.innerHTML = `
+                <div class="resume-header">
+                    <div class="profile-picture">
+                        ${picturePreview ? `<img src="${picturePreview}" alt="Profile Picture">` : ''}
+                    </div>
+                    <div>
+                        <h2>${name}</h2>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Phone:</strong> ${phone}</p>
+                    </div>
+                </div>
+                <div class="resume-content">
+                    <h3>Education</h3>
+                    <p>${education}</p>
+                    <h3>Work Experience</h3>
+                    <p>${experience}</p>
+                    <h3>Skills</h3>
+                    <p>${skills}</p>
+                    <h3>Additional Information</h3>
+                    <p>${additionalInfo}</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
